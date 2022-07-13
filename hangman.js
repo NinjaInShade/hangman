@@ -111,16 +111,31 @@ const setupGame = (word) => {
 
 // Fetch random word using random word API
 const fetchWord = async () => {
-  const request = await fetch('https://random-word-api.herokuapp.com/word');
-  const wordFetched = await request.json();
+  let definitionRequestStatus = 404;
 
-  const definitionRequest = await fetch(
+  let request = await fetch('https://random-word-api.herokuapp.com/word');
+  let wordFetched = await request.json();
+
+  let definitionRequest = await fetch(
     `https://api.dictionaryapi.dev/api/v2/entries/en/${wordFetched[0]}`
   );
-  const wordDefinition = await definitionRequest.json();
+  definitionRequestStatus = definitionRequest.status;
 
+  // No definition found
+  while (definitionRequestStatus === 404) {
+    request = await fetch('https://random-word-api.herokuapp.com/word');
+    wordFetched = await request.json();
+
+    definitionRequest = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${wordFetched[0]}`
+    );
+    definitionRequestStatus = definitionRequest.status;
+  }
+
+  const wordDefinition = await definitionRequest.json();
   return { word: wordFetched[0], definition: wordDefinition };
 };
+
 (async () => {
   const word = await fetchWord();
 
