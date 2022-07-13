@@ -50,7 +50,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 24px 0;
+  margin: 16px 0 32px 0;
   gap: 8px;
 }
 
@@ -72,8 +72,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 16px;
-  max-width: 600px;
+  margin: 16px 0 24px 0;
+  max-width: 650px;
   gap: 16px;
 }
 
@@ -93,4 +93,23 @@ body {
 .letter--pressed {
   background-color: var(--white);
   color: var(--bg-dark);
+}
+
+.guess {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.guess-letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--txt);
+  line-height: var(--txt-lh);
+  border-bottom: 1px solid var(--white);
+  color: var(--white);
+  min-width: 10px;
+  height: 25px;
 }

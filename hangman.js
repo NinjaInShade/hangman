@@ -1,16 +1,10 @@
 const livesTxt = document.getElementById('lives');
 const alphabetContainer = document.getElementById('alphabet-container');
+const guessContainer = document.getElementById('guess');
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 let lives = 10;
 let word;
-
-const fetchWord = async () => {
-  const request = await fetch('https://random-word-api.herokuapp.com/word');
-  const wordFetched = await request.json();
-
-  word = wordFetched[0];
-};
 
 const setupGame = () => {
   livesTxt.innerText = `Lives: ${lives}`;
@@ -28,9 +22,37 @@ const setupGame = () => {
 
   // Add event listener for keyboard press
   document.addEventListener('keydown', (e) => {
+    if (document.getElementById(e.key).classList.contains('letter--pressed')) return;
+
     document.getElementById(e.key).classList.add('letter--pressed');
+
+    if (!word.split('').includes(e.key)) {
+      lives -= 1;
+      livesTxt.innerText = `Lives: ${lives}`;
+      return;
+    }
   });
+
+  // Display number of letters
+  for (let j = 0; j < word.length; j++) {
+    const wordLetter = document.createElement('div');
+
+    wordLetter.classList.add('guess-letter');
+    wordLetter.setAttribute('id', `guess-${word[j]}`);
+
+    guessContainer.appendChild(wordLetter);
+  }
+};
+
+const fetchWord = async () => {
+  const request = await fetch('https://random-word-api.herokuapp.com/word');
+  const wordFetched = await request.json();
+
+  word = wordFetched[0];
+
+  console.log(word);
+
+  setupGame();
 };
 
 fetchWord();
-setupGame();
