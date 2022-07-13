@@ -1,10 +1,25 @@
 const livesTxt = document.getElementById('lives');
 const alphabetContainer = document.getElementById('alphabet-container');
 const guessContainer = document.getElementById('guess');
+const heart = document.getElementById('heart');
+const heartBroken = document.getElementById('heart-broken');
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 let lives = 10;
 let word;
+
+const deductLife = () => {
+  lives -= 1;
+  livesTxt.innerText = `Lives: ${lives}`;
+
+  if (lives === 0) {
+    // TODO: Figure out cool ending
+    console.log('GAME OVER!');
+  } else if (lives <= 3) {
+    heart.classList.add('hidden');
+    heartBroken.classList.remove('hidden');
+  }
+};
 
 const setupGame = () => {
   livesTxt.innerText = `Lives: ${lives}`;
@@ -27,9 +42,7 @@ const setupGame = () => {
     document.getElementById(e.key).classList.add('letter--pressed');
 
     if (!word.split('').includes(e.key)) {
-      lives -= 1;
-      livesTxt.innerText = `Lives: ${lives}`;
-      return;
+      return deductLife();
     }
   });
 
