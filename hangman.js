@@ -1,3 +1,5 @@
+import { fetchWordData } from './fetchWord.js';
+
 const livesTxt = document.getElementById('lives');
 
 const alphabetContainer = document.getElementById('alphabet-container');
@@ -109,31 +111,16 @@ const setupGame = (word) => {
   }
 };
 
-// Fetch random word using random word API
+// Fetch random word using random word API along with dictionary API
 const fetchWord = async () => {
-  let definitionRequestStatus = 404;
-
-  let request = await fetch('https://random-word-api.herokuapp.com/word');
-  let wordFetched = await request.json();
-
-  let definitionRequest = await fetch(
-    `https://api.dictionaryapi.dev/api/v2/entries/en/${wordFetched[0]}`
-  );
-  definitionRequestStatus = definitionRequest.status;
+  let wordData = await fetchWordData();
 
   // No definition found
-  while (definitionRequestStatus === 404) {
-    request = await fetch('https://random-word-api.herokuapp.com/word');
-    wordFetched = await request.json();
-
-    definitionRequest = await fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${wordFetched[0]}`
-    );
-    definitionRequestStatus = definitionRequest.status;
+  while (wordData.status === 404) {
+    wordData = await fetchWordData();
   }
 
-  const wordDefinition = await definitionRequest.json();
-  return { word: wordFetched[0], definition: wordDefinition };
+  return wordData;
 };
 
 (async () => {
