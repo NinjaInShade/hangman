@@ -43,6 +43,12 @@ const setupGame = () => {
 
     if (!word.split('').includes(e.key)) {
       return deductLife();
+    } else {
+      const correctLetters = document.getElementsByClassName(`guess-${e.key}`);
+
+      for (let k = 0; k < correctLetters.length; k++) {
+        correctLetters[k].innerText = e.key;
+      }
     }
   });
 
@@ -50,8 +56,7 @@ const setupGame = () => {
   for (let j = 0; j < word.length; j++) {
     const wordLetter = document.createElement('div');
 
-    wordLetter.classList.add('guess-letter');
-    wordLetter.setAttribute('id', `guess-${word[j]}`);
+    wordLetter.classList.add('guess-letter', `guess-${word[j]}`);
 
     guessContainer.appendChild(wordLetter);
   }
