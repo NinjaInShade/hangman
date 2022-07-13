@@ -48,7 +48,15 @@ const setupGame = () => {
       const correctLetters = document.getElementsByClassName(`guess-${e.key}`);
 
       for (let k = 0; k < correctLetters.length; k++) {
-        correctLetters[k].innerText = e.key;
+        correctLetters[k].classList.add('guess-letter--pre-animation');
+
+        setTimeout(() => {
+          correctLetters[k].innerText = e.key;
+        }, 100);
+
+        setTimeout(() => {
+          correctLetters[k].classList.remove('guess-letter--pre-animation');
+        }, 100);
       }
     }
   });
