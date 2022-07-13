@@ -38,7 +38,7 @@ const setupGame = () => {
 
   // Add event listener for keyboard press
   document.addEventListener('keydown', (e) => {
-    if (document.getElementById(e.key).classList.contains('letter--pressed')) return;
+    if (document.getElementById(e.key).classList.contains('letter--pressed') || lives === 0) return;
 
     document.getElementById(e.key).classList.add('letter--pressed');
 
