@@ -52,11 +52,11 @@ const setupGame = () => {
 
         setTimeout(() => {
           correctLetters[k].innerText = e.key;
-        }, 100);
+        }, 150);
 
         setTimeout(() => {
           correctLetters[k].classList.remove('guess-letter--pre-animation');
-        }, 100);
+        }, 150);
       }
     }
   });
