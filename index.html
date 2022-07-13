@@ -10,10 +10,23 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="index.css" />
-    <script src="hangman.js"></script>
+
     <title>Hangman game</title>
   </head>
   <body>
     <h1 class="title">HANGMAN - built with vanilla javascript</h1>
+    <div class="lives-container">
+      <img src="assets/heart.png" alt="Heart icon representing lives" class="heart" id="heart" />
+      <img
+        src="assets/heart-broken.png"
+        alt="Broken heart icon representing low lives"
+        class="heart hidden"
+        id="heart-broken"
+      />
+      <p class="txt" id="lives"></p>
+    </div>
+    <p class="txt">Type with your keyboard to try and guess the word!</p>
+    <div class="alphabet" id="alphabet-container"></div>
+    <script src="hangman.js"></script>
   </body>
 </html>
