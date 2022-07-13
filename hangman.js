@@ -8,6 +8,7 @@ const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 let lives = 10;
 let word;
 
+// Lives logic
 const deductLife = () => {
   lives -= 1;
   livesTxt.innerText = `Lives: ${lives}`;
@@ -62,6 +63,7 @@ const setupGame = () => {
   }
 };
 
+// Fetch random word using random word API
 const fetchWord = async () => {
   const request = await fetch('https://random-word-api.herokuapp.com/word');
   const wordFetched = await request.json();

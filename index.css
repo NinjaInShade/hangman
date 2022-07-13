@@ -110,6 +110,6 @@ body {
   line-height: var(--txt-lh);
   border-bottom: 1px solid var(--white);
   color: var(--white);
-  min-width: 10px;
   height: 25px;
+  min-width: 10px;
 }
