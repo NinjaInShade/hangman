@@ -3,6 +3,14 @@ const alphabetContainer = document.getElementById('alphabet-container');
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 let lives = 10;
+let word;
+
+const fetchWord = async () => {
+  const request = await fetch('https://random-word-api.herokuapp.com/word');
+  const wordFetched = await request.json();
+
+  word = wordFetched[0];
+};
 
 const setupGame = () => {
   livesTxt.innerText = `Lives: ${lives}`;
@@ -24,4 +32,5 @@ const setupGame = () => {
   });
 };
 
+fetchWord();
 setupGame();
